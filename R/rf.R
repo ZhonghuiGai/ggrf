@@ -65,8 +65,9 @@ rf_importance <- function(rf, type = 2, simply = TRUE, sort = TRUE){
 #' colnames(data)[5] <- "group"
 #' ggrf(data) |>  rf_importance()  |> groutable::dt2()
 #' ggrf(data) |>  rf_importance() |> rf_importance_plot()
-rf_importance_plot <- function(data){
+rf_importance_plot <- function(data, n = 15){
   data$sample <- factor(data$sample, levels = data$sample)
+  if (nrow(data) > n) data <- data[1:n, ]
   ggplot(data = data, aes(x = sample, y = MeanDecreaseGini)) +
     geom_col(color = "white", size = 0.5, fill = "#3C5488") +
     ggtheme::theme_pub() +
