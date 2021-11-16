@@ -41,7 +41,7 @@ ggrf <- function(data, ntree = 500, ...){
 rf_importance <- function(rf, type = 2, simply = TRUE, sort = TRUE){
   if (!inherits(rf, "randomForest"))
     stop(deparse(substitute(rf)), " must be a randomForest object")
-  res <- round(importance(rf, type = type), 2)  |> as.data.frame()
+  res <- round(randomForest::importance(rf, type = type), 2)  |> as.data.frame()
   if (simply) {
     res <- rownames_to_col(res)
     rownames(res) <- NULL
